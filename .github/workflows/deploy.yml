@@ -27,7 +27,7 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v6
       with:
-        python-version: '3.13'
+        python-version: '3.12'
         cache: pip
 
     - name: Install jupyter-book
@@ -43,7 +43,12 @@ jobs:
     # Build the book
     - name: Build the book
       run: |
-        jupyter-book build .
+        jupyter-book build . --verbose
+
+    - name: List build output
+      run: |
+        echo "Files in _build/html:"
+        find _build/html -name "*.html" | head -30
 
 
     # https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow
