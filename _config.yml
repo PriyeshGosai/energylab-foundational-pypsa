@@ -13,7 +13,7 @@ copyright: "2026"
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks: 'auto'  # Don't execute notebooks, show them as-is
+  execute_notebooks: 'off'  # 'auto' or 'off'
   timeout: 900  # 15 minutes
   allow_errors: true
 
