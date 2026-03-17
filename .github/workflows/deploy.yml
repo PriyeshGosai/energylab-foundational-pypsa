@@ -6,6 +6,9 @@ on:
     branches:
     - main
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 # This job installs dependencies, build the book, and pushes it to `gh-pages`
 jobs:
   build-and-deploy-book:
@@ -27,13 +30,8 @@ jobs:
         python-version: '3.13'
         cache: pip
 
-    - name: Install environment with pip
-      run: pip install -r requirements.txt
-
-    # Build the book
-    - name: Build the book
-      run: |
-        jupyter-book build .
+    - name: Install jupyter-book
+      run: pip install "jupyter-book<2"
 
     # cache notebooks
     - name: cache executed notebooks
@@ -41,6 +39,11 @@ jobs:
       with:
         path: _build/.jupyter_cache
         key: jupyter-book-cache-${{ hashFiles('requirements.txt') }}
+
+    # Build the book
+    - name: Build the book
+      run: |
+        jupyter-book build .
 
 
     # https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow
@@ -54,4 +57,4 @@ jobs:
     # Deploy the book's HTML to GitHub Pages
     - name: Deploy to GitHub Pages
       id: deployment
-      uses: actions/deploy-pages@v4
+      uses: actions/deploy-pages@v5
