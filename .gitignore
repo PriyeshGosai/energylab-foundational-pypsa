@@ -20,7 +20,7 @@ ENV/
 
 
 # Data files (keep repository light)
-*.geojson
+# *.geojson
 *.nc
 *.tiff
 *.tif
